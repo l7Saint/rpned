@@ -71,6 +71,7 @@ int main(int argc, char** argv){
 					break;
 				case NOT_A_NUMBER:
 					printf("Result is not a number.\n");
+					break;
 				default:
 					printf("Error code not recognized, Error Code: %i\n", errcode);		
 			}
