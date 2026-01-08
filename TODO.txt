@@ -1,0 +1,15 @@
+* being able to provide an argument (-e"1 2 +") that executes that sequence and outputs a result (3)
+* complex mode
+* add: sqrt, nrt, ^, ceil, floor, re, im, abs, !, %, ln, log, logn
+* license
+* help command
+* piped input and output
+* constants
+* custom constants
+* macros
+* undo
+* swap
+* drop
+* rolling
+* radian, degree, gradian for trigonometric functions
+* memory
