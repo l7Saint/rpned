@@ -18,6 +18,10 @@ void clean_input(char* input){
 	input[i] = '\0';
 }
 
+bool is_number(char c){
+	return c >= '0' && c <= '9';
+}
+
 int main(int argc, char** argv){
 	bool running = true;
 	struct Stack_unit* top_stack = (struct Stack_unit*)malloc(sizeof(struct Stack_unit));
@@ -31,7 +35,8 @@ int main(int argc, char** argv){
 		fgets(input_buffer, sizeof(input_buffer), stdin);	
 		clean_input(input_buffer);
 		
-		if(input_buffer[0] >= '0' && input_buffer[0] <= '9'){
+		/*TODO: make ts more efficient plz */
+		if(is_number(input_buffer[0]) || (input_buffer[0] == '-' && (unsigned)strlen(input_buffer) >= 2 && is_number(input_buffer[1]))) {
 			double input_number = strtod(input_buffer, NULL);
 			push_stack(top_stack, input_number);	
 		} else if (input_buffer[0] == ':') {
@@ -64,6 +69,8 @@ int main(int argc, char** argv){
 				case STACK_SIZE_INVALID:
 					printf("Not enough stack size for desired operation.\n");
 					break;
+				case NOT_A_NUMBER:
+					printf("Result is not a number.\n");
 				default:
 					printf("Error code not recognized, Error Code: %i\n", errcode);		
 			}

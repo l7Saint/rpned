@@ -49,7 +49,9 @@ int fn_cos(struct Stack_unit* top){
 }
 
 int fn_tan(struct Stack_unit* top){
-	/*TODO: proper checking if tan(top->num) == NAN*/
+	/*tan = sin/cos -> if cos == 0 then !exist tan*/
+	if(cos(top->num) == 0)
+		return NOT_A_NUMBER;
 	top->num = tan(top->num);
 	return OK;
 }
