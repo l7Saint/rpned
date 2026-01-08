@@ -1,5 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdint.h>
+#include<stdbool.h>
 
 #ifndef STACK_UNIT_STRUCT
 #define STACK_UNIT_STRUCT
@@ -8,6 +10,16 @@ struct Stack_unit {
 	struct Stack_unit* next;
 };
 #endif
+
+#ifndef DEBUG_MODE
+#define DEBUG_MODE true
+#endif
+
+void free_unit(struct Stack_unit *unit){
+	if(DEBUG_MODE)	
+		printf("DEBUG: freed %f, addr: %#lx\n", unit->num,(uint64_t)unit);
+	free(unit);
+}
 
 double pop_stack(struct Stack_unit *top){
 	double num = 0;
@@ -43,15 +55,23 @@ void push_stack(struct Stack_unit *top, double num){
 	}
 }
 
+void print_unit(struct Stack_unit* unit){
+	if(DEBUG_MODE){
+		printf("%f DEBUG: addr: %#lx\n", unit->num,(uint64_t)unit);
+	} else {
+		printf("%f\n", unit->num);
+	}
+}
+
 void print_stack(struct Stack_unit* top){
 	const char* topbottomtext = "|-----------STACK-----------|";
 	struct Stack_unit* index = top;
 
 	printf("%s\n", topbottomtext);
-	printf("%f\n", index->num);
+	print_unit(index);
 	while (index->next != NULL){	
 		index = index->next;
-		printf("%f\n", index->num);
+		print_unit(index);
 	} 	
 	printf("%s\n", topbottomtext);
 }
@@ -70,34 +90,35 @@ void free_stack(struct Stack_unit* top){
 	struct Stack_unit* index1 = top;
 	struct Stack_unit* index2 = top->next;
 
-	while(index2 != NULL){
-		free(index1);
+	while(index2 != NULL){	
+		free_unit(index1);
 		index1 = index2;
-		index2 = index1->next;
+		if(index1 != NULL)
+			index2 = index1->next;
 	}
-	free(index1);
+	free_unit(index1);
 }
 
 /*TODO: fix mem leakage*/
 void flush_stack(struct Stack_unit* top){
-	if(top->next == NULL)
+	if(check_size_stack(top) == 1)
 		return;
-	if((top->next)->next == NULL){
-		free(top->next);
+	else if (check_size_stack(top) == 2) {
+		free_unit(top->next);
 		top->next = NULL;
 		return;
 	}
-	
-	struct Stack_unit* index1 = top->next;	
+
+	struct Stack_unit* index1 = top->next;
 	struct Stack_unit* index2 = index1->next;
 
-	while(index2->next != NULL){	
-		free(index1);
+	while(index2 != NULL){	
+		free_unit(index1);
 		index1 = index2;
-		index2 = index1->next;
+		if(index1 != NULL)
+			index2 = index1->next;
 	}
-
-	top->num = 0;
+	free_unit(index1);
 	top->next = NULL;
 }
 

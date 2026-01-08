@@ -4,10 +4,17 @@
 #include<unistd.h>
 
 #ifndef STACK_H
+#define STACK_H
 #include"stack.h"
 #endif
+
 #ifndef OP_PARSER_C
+#define OP_PARSER_C
 #include"op_parser.c"
+#endif
+
+#ifndef DEBUG_MODE
+#define DEBUG_MODE true
 #endif
 
 void clean_input(char* input){
