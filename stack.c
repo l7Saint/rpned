@@ -85,6 +85,7 @@ void flush_stack(struct Stack_unit* top){
 	if((top->next)->next == NULL){
 		free(top->next);
 		top->next = NULL;
+		return;
 	}
 	
 	struct Stack_unit* index1 = top->next;	
