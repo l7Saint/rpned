@@ -85,3 +85,22 @@ int fn_radtodeg(struct Stack_unit* top){
 	return OK;
 }
 
+int fn_sqrt(struct Stack_unit* top){
+	if(top->num < 0)
+		return NOT_A_NUMBER;
+	top->num = sqrt(top->num);
+	return OK;
+}
+
+int fn_nrt(struct Stack_unit* top){
+	if(check_size_stack(top) < 2)
+		return STACK_SIZE_INVALID;
+	if(top->next->num < 0 && ((int)floor(top->num) % 2 == 0 || floor(top->num) != top->num))
+		return NOT_A_NUMBER;
+	if(top->next->num == 0)
+		return DIVISION_BY_0;
+
+	double num1 = pop_stack(top);
+	top->num = pow(top->num, 1/num1);
+	return OK;
+}

@@ -21,7 +21,20 @@
 	X(acos, acos) \
 	X(atan, atan) \
 	X(dtr, degtorad) \
-	X(rtd, radtodeg)
+	X(rtd, radtodeg) \
+	X(sqrt, sqrt) \
+	X(nrt, nrt) \
+
+	/*TODO: to add*/
+	//X(^, power) \
+	//X(ceil, ceil) \
+	//X(floor, floor) \
+	//X(abs, abs) \
+	//X(!, fact) \
+        //X(%, mod) \
+	//X(ln, ln) \
+	//X(log, log) \
+	//X(logn, logn)
 
 struct Op {
 	char* string;
