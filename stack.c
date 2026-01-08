@@ -99,7 +99,6 @@ void free_stack(struct Stack_unit* top){
 	free_unit(index1);
 }
 
-/*TODO: fix mem leakage*/
 void flush_stack(struct Stack_unit* top){
 	if(check_size_stack(top) == 1)
 		return;
