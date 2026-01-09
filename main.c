@@ -2,32 +2,21 @@
 #include<stdbool.h>
 #include<stdio.h>
 #include<unistd.h>
-
-#ifndef STACK_H
-#define STACK_H
 #include"stack.h"
-#endif
 
 #ifndef OP_PARSER_C
-#define OP_PARSER_C
 #include"op_parser.c"
+#define OP_PARSER_C
+#endif
+
+#ifndef COMMAND_PARSER_C
+#include"command_parser.c"
+#define COMMAND_PARSER_C
 #endif
 
 #ifndef DEBUG_MODE
 #define DEBUG_MODE true
 #endif
-
-void clean_input(char* input){
-	int i = 0;
-
-	while(input[i] != '\n')
-		i++;
-	input[i] = '\0';
-}
-
-bool is_number(char c){
-	return c >= '0' && c <= '9';
-}
 
 int main(int argc, char** argv){
 	bool running = true;
@@ -47,20 +36,14 @@ int main(int argc, char** argv){
 			double input_number = strtod(input_buffer, NULL);
 			push_stack(top_stack, input_number);	
 		} else if (input_buffer[0] == ':') {
-			/* command section */
-			switch(input_buffer[1]){
-				case 'q':
-					running = false;
+			int errcode = command_parser(input_buffer, top_stack, &running);	
+			switch(errcode){
+				case OK:
 					break;
-				case 's':
-					print_stack(top_stack);
-					break;	
-				case 'p':
-					pop_stack(top_stack);
+				case COMMAND_NOT_FOUND:
+					printf("Invalid command \n");
 					break;
-				case 'f':
-					flush_stack(top_stack);
-					break;
+				
 			}
 		} else {
 			int errcode = op_parser(input_buffer, top_stack);

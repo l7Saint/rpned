@@ -31,7 +31,7 @@ double pop_stack(struct Stack_unit *top){
 		top->num = old_second->num;
 		top->next = old_second->next;
 
-		free(old_second);
+		free_unit(old_second);
 	}	
 	return num;
 }

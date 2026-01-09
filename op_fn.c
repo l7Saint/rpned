@@ -1,4 +1,9 @@
 #define PI 3.1415926
+/* TEMPLATE
+int fn_(struct Stack_unit* top){
+	return OK;
+}
+*/
 
 int fn_add(struct Stack_unit* top){
 	if(check_size_stack(top) < 2)

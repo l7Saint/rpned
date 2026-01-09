@@ -1,18 +1,20 @@
+#ifndef OP_PARSER_C
+
 #include<string.h>
 #include<stdlib.h>
 #include<math.h>
 #include"stack.h"
 
-/*Exit codes for the operation functions*/
-#define OP_NOT_FOUND -1
-#define STACK_SIZE_INVALID 1
-#define OK 0
-#define DIVISION_BY_0 -2
-#define NOT_A_NUMBER -3
-
 #ifndef DEBUG_MODE
 #define DEBUG_MODE true
 #endif
+
+/*Exit codes for the operation functions*/
+#define OK 0
+#define OP_NOT_FOUND -1
+#define STACK_SIZE_INVALID 1
+#define DIVISION_BY_0 -2
+#define NOT_A_NUMBER -3
 
 #define OPLIST \
 	X(+, add) \
@@ -69,3 +71,5 @@ int op_parser(char* input_buffer, struct Stack_unit* top){
 
 	return returnv;
 }
+
+#endif
