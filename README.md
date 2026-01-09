@@ -31,7 +31,7 @@ Example: ":4d" will pop out the stack 4 times.
 
 
 Example of usage:
-`
+```
 $ rpned
 >> 10
 >> 15
@@ -85,6 +85,6 @@ $ rpned
 |-----------STACK-----------|
 >> :q
 $
-`
+```
 
 
