@@ -63,17 +63,39 @@ void print_unit(struct Stack_unit* unit){
 	}
 }
 
-void print_stack(struct Stack_unit* top){
-	const char* topbottomtext = "|-----------STACK-----------|";
-	struct Stack_unit* index = top;
+char get_letter_print(int i){
+	switch(i){
+		case 1:
+			return 'X';
+		case 2:
+			return 'Y';
+		case 3:
+			return 'Z';
+		default:
+			return '?';
+	}
+}
 
-	printf("%s\n", topbottomtext);
+void print_stack(struct Stack_unit* top){
+	const char* toptext = "|-----------STACK-----------|";
+	const char* bottomtext = "|---------------------------|";
+	struct Stack_unit* index = top;
+	int i = 1;
+
+	printf("%s\n", toptext);
+	printf("%c: ", get_letter_print(i));
+	i++;
 	print_unit(index);
 	while (index->next != NULL){	
 		index = index->next;
+		if(i < 4)
+			printf("%c: ", get_letter_print(i));
+		else
+			printf("%i: ", i);
+		i++;
 		print_unit(index);
 	} 	
-	printf("%s\n", topbottomtext);
+	printf("%s\n", bottomtext);
 }
 
 int check_size_stack(struct Stack_unit* top){

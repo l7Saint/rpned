@@ -109,3 +109,50 @@ int fn_nrt(struct Stack_unit* top){
 	top->num = pow(top->num, 1/num1);
 	return OK;
 }
+
+int fn_power(struct Stack_unit* top){
+	if(check_size_stack(top) < 2)
+		return STACK_SIZE_INVALID;
+	double result = pow(top->next->num, top->num);
+	if(result == NAN)
+		return NOT_A_NUMBER;
+
+	pop_stack(top);
+	top->num = result;
+	return OK;
+}
+
+int fn_ceil(struct Stack_unit* top){
+	top->num = ceil(top->num);
+	return OK;
+}
+
+int fn_floor(struct Stack_unit* top){
+	top->num = floor(top->num);
+	return OK;
+}
+
+int fn_absv(struct Stack_unit* top){
+	if(top->num < 0)
+		top->num = top->num * -1;
+	return OK;
+}
+
+int fn_ln(struct Stack_unit* top){
+	top->num = log(top->num);
+	return OK;
+}
+
+int fn_log(struct Stack_unit* top){
+	top->num = log10(top->num);
+	return OK;
+}
+
+/*logX(Y)*/
+int fn_logn(struct Stack_unit* top){
+	if(check_size_stack(top) < 2)
+		return STACK_SIZE_INVALID;
+	double num = pop_stack(top);
+	top->num = log(top->num)/log(num);
+	return OK;
+}

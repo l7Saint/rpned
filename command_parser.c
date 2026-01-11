@@ -16,7 +16,8 @@
 	X(q, quit) \
 	X(s, stack) \
 	X(d, drop) \
-	X(f, flush)
+	X(f, flush) \
+	X(h, help)
 
 void clean_input(char* input){
 	int i = 0;

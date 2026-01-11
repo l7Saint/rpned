@@ -23,3 +23,9 @@ int fn_flush(struct Stack_unit* top_stack, bool* running){
 	flush_stack(top_stack);
 	return OK;
 }
+
+int fn_help(struct Stack_unit* top_stack, bool* running){
+	#include"help_op.c"
+	printf("%s\n", help_op_string);
+	return OK;
+}

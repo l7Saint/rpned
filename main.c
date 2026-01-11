@@ -43,7 +43,6 @@ int main(int argc, char** argv){
 				case COMMAND_NOT_FOUND:
 					printf("Invalid command \n");
 					break;
-				
 			}
 		} else {
 			int errcode = op_parser(input_buffer, top_stack);
